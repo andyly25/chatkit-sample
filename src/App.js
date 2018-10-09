@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import username component
 import UsernameForm from './components/UsernameForm';
 // import ChatScreen
-import ChatScreen from './ChatScreen';
+import ChatScreen from './components/ChatScreen';
 
 class App extends Component {
   constructor() {

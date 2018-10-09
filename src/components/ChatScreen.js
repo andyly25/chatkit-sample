@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 // import chatkit
 import Chatkit from '@pusher/chatkit';
+// import css
+import './ChatScreen.css'
 
 class ChatScreen extends Component {
   constructor(props) {
@@ -35,9 +37,17 @@ class ChatScreen extends Component {
   }
 
   render() {
+
     return (
-      <div>
-        <h1>Chat</h1>
+      <div className="container">
+        <div className="chatContainer">
+          <aside className="onlineListContainer">
+            <h2>Who's online PLaceHolder</h2>
+          </aside>
+          <section className="chatListContainer">
+            <h2>Chat Placeholder</h2>
+          </section>
+        </div>
       </div>
     );
   }
