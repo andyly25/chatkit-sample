@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 // import chatkit
-const ChatKit = require('pusher-chatkit-server');
+const ChatKit = require('@pusher/chatkit-server');
 
 const app = express()
 
@@ -26,12 +26,17 @@ app.post('/users', (req, res) => {
     })
     .then(() => res.sendStatus(201))
     .catch(error => {
-      if (error.error_type === 'services/chatkit/user_already_exists') {
+      if (error.error === 'services/chatkit/user_already_exists') {
         res.sendStatus(200);
       } else {
         res.status(error.status).json(error);
       }
     });
+});
+
+app.post('/authenticate', (req, res) => {
+  const authData = chatkit.authenticate({ userId: req.query.user_id });
+  res.status(authData.status).send(authData.body);
 });
 
 const PORT = 3001

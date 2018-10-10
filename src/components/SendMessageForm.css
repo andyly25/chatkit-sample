@@ -1,0 +1,18 @@
+form {
+  display:  flex;
+}
+
+input {
+  color: inherit;
+  background: none;
+  outline: none;
+  border: none;
+  flex: 1;
+  font-size: 16px;
+}
+
+.container {
+  padding:  20px;
+  border-top: 1px #4c758f solid;
+  margin-bottom: 20px;
+}
