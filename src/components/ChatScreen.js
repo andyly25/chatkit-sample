@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 // import chatkit
 import Chatkit from '@pusher/chatkit';
+import MessageList from './MessageList';
 // import css
 import './ChatScreen.css'
 
@@ -10,7 +11,9 @@ class ChatScreen extends Component {
   constructor(props) {
     super(props);
     this.state={
-      currentUser: {}
+      currentUser: {},
+      currentRoom: {},
+      messages: []
     }
   }
 
@@ -32,6 +35,20 @@ class ChatScreen extends Component {
       .connect()
       .then(currentUser => {
         this.setState({ currentUser });
+        return currentUser.subscribeToRoom({
+          roomId: 18192681,
+          messageLimit: 100,
+          hooks: {
+            onNewMessage: message => {
+              this.setState({
+                messages: [...this.state.messages, message]
+              })
+            }
+          }
+        })
+      })
+      .then(currentRoom => {
+        this.setState({ currentRoom })
       })
       .catch(err => console.error('error', err));
   }
@@ -45,7 +62,9 @@ class ChatScreen extends Component {
             <h2>Who's online PLaceHolder</h2>
           </aside>
           <section className="chatListContainer">
-            <h2>Chat Placeholder</h2>
+            <MessageList 
+              messages={this.state.messages}
+            />
           </section>
         </div>
       </div>
