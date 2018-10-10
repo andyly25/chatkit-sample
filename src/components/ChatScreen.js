@@ -6,6 +6,7 @@ import Chatkit from '@pusher/chatkit';
 import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
 import TypingIndicator from './TypingIndicator';
+import WhosOnlineList from './WhosOnlineList'
 // import css
 // import './ChatScreen.css'
 
@@ -26,6 +27,7 @@ class ChatScreen extends Component {
     this.state.currentUser
       .isTypingIn({ roomId: this.state.currentRoom.id })
       .catch(error => console.error('error', error));
+    console.log('Someone is typing');
   }
 
   // when SendMessage form is submitted, we call this
@@ -62,21 +64,39 @@ class ChatScreen extends Component {
           messageLimit: 100,
           hooks: {
             onNewMessage: message => {
+              console.log(`${message} sent`);
               this.setState({
                 messages: [...this.state.messages, message],
               })
             },
             onUserStartedTyping: user => {
-              // typing indicators from chatkit listeners
+              console.log(`User ${user.name} started typing`);
               this.setState({
-                usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name]
+                usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name],
               })
             },
             onUserStoppedTyping: user => {
+              console.log(`User ${user.name} stopped typing`);
               this.setState({
                 usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
                   username => username !== user.name
-                )
+                ),
+              })
+            },
+            onUserCameOnline: user => {
+              // these properties are dynamically updated
+              this.setState({
+                users: this.currentRoom.users
+              })
+            },
+            onUserCameOffline: user => {
+              this.setState({
+                users: this.currentRoom.users
+              })
+            },
+            onUserJoined: user => {
+              this.setState({
+                users: this.currentRoom.users
               })
             }
           }
@@ -120,6 +140,7 @@ class ChatScreen extends Component {
         padding: 20,
         backgroundColor: '#2c303b',
         color: 'white',
+        overflowY: 'scroll'
       },
       chatListContainer: {
         padding: 20,
@@ -133,7 +154,10 @@ class ChatScreen extends Component {
       <div style={styles.container}>
         <div style={styles.chatContainer}>
           <aside style={styles.whosOnlineListContainer}>
-            <h2>Who's online PLaceHolder</h2>
+            <WhosOnlineList 
+              currentUser={this.state.currentUser}
+              users={this.state.currentRoom.users}
+            />
           </aside>
           <section style={styles.chatListContainer}>
             <MessageList
