@@ -1,6 +1,7 @@
 // render a list of users and their real time online status
 
 import React, { Component } from 'react';
+import './WhosOnlineList.css';
 
 class WhosOnlineList extends Component {
   renderUsers() {
@@ -35,29 +36,12 @@ class WhosOnlineList extends Component {
 
 class WhosOnlineListItem extends Component {
   render() {
-    // remember to make a CSS file for this
-    const styles = {
-      li: {
-        display: 'flex',
-        alignItems: 'center',
-        marginTop: 5,
-        marginBottom: 5,
-        paddingTop: 2,
-        paddingBottom: 2,
-      },
-      div: {
-        borderRadius: '50%',
-        width: 11,
-        height: 11,
-        marginRight: 10,
-      },
-    }
 
     return (
-      <li style={styles.li}>
+      <li className="wol-li">
         <div 
+          className="wol-div"
           style={{
-            ...styles.div,
             backgroundColor:
               this.props.presenceState === 'online' ? '#539eff' : '#414756'
           }}

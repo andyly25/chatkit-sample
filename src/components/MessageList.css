@@ -1,12 +1,12 @@
-ul {
+.message-ulist {
   list-style: none;
 }
 
-li {
+.message-li {
   margin: 13px 0;
 }
 
-.container {
+.message-container {
   overflow-y: scroll;
   flex: 1;
 }

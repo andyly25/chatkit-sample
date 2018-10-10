@@ -1,68 +1,23 @@
-// import React, { Component } from 'react';
-// import './MessageList.css'
-
-// class MessagesList extends Component {
-//   render() {
-//     return (
-//       <div className="container">
-//         <ul>
-//           {this.props.messages.map((message, index) => (
-//             <li key={index}>
-//               <div>
-//                 <span className="sender-username">{message.senderId}</span>
-//               </div>
-//               <p className="message">{message.text}</p>
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     );
-//   }
-// }
-
-// export default MessagesList;
-
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './MessageList.css'
 
 class MessagesList extends Component {
   render() {
-    const styles = {
-      container: {
-        overflowY: 'scroll',
-        flex: 1,
-      },
-      ul: {
-        listStyle: 'none',
-      },
-      li: {
-        marginTop: 13,
-        marginBottom: 13,
-      },
-      senderUsername: {
-        fontWeight: 'bold',
-      },
-      message: { fontSize: 15 },
-    }
     return (
-      <div
-        style={{
-          ...this.props.style,
-          ...styles.container,
-        }}
-      >
-        <ul style={styles.ul}>
+      <div className="message-container">
+        <ul className="message-ulist">
           {this.props.messages.map((message, index) => (
-            <li key={index} style={styles.li}>
+            <li key={index} className="message-list">
               <div>
-                <span style={styles.senderUsername}>{message.senderId}</span>{' '}
+                <span className="sender-username">{message.senderId}</span>
               </div>
-              <p style={styles.message}>{message.text}</p>
+              <p className="message">{message.text}</p>
             </li>
           ))}
         </ul>
       </div>
-    )
+    );
   }
 }
 
-export default MessagesList
+export default MessagesList;

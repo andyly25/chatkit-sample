@@ -8,7 +8,7 @@ import SendMessageForm from './SendMessageForm';
 import TypingIndicator from './TypingIndicator';
 import WhosOnlineList from './WhosOnlineList'
 // import css
-// import './ChatScreen.css'
+import './ChatScreen.css'
 
 class ChatScreen extends Component {
   constructor(props) {
@@ -46,9 +46,17 @@ class ChatScreen extends Component {
     const chatManager = new Chatkit.ChatManager({
       instanceLocator: 'v1:us1:5dff3a4f-a6e4-4036-b974-d09e53dc0568',
       userId: this.props.currentUsername,
+      connectionTimeout: 20000,
       tokenProvider: new Chatkit.TokenProvider({
         url: 'http://localhost:3001/authenticate'
-      })
+      }),
+      logger: {
+        verbose: console.log,
+        debug: console.log,
+        info: console.log,
+        warn: console.log,
+        error: console.log,
+      }
     })
 
     // once initialized, call connect which happens async and a Promise returned
@@ -59,6 +67,7 @@ class ChatScreen extends Component {
         this.setState({ currentUser });
         // call subscribeToRoom on curr user, takes event handler onNewMessage
         // called in real tiem each time new message arrives
+        // call forceUpdate which tells React to evaluate currentRoom.users and update the UI
         return currentUser.subscribeToRoom({
           roomId: 18192681,
           messageLimit: 100,
@@ -83,22 +92,9 @@ class ChatScreen extends Component {
                 ),
               })
             },
-            onUserCameOnline: user => {
-              // these properties are dynamically updated
-              this.setState({
-                users: this.currentRoom.users
-              })
-            },
-            onUserCameOffline: user => {
-              this.setState({
-                users: this.currentRoom.users
-              })
-            },
-            onUserJoined: user => {
-              this.setState({
-                users: this.currentRoom.users
-              })
-            }
+            onUserCameOnline: () => this.forceUpdate(),
+            onUserWentOffline: () => this.forceUpdate(),
+            onUserJoined: () => this.forceUpdate()
           }
         })
       })
@@ -109,60 +105,18 @@ class ChatScreen extends Component {
   }
 
   render() {
-
-    // return (
-    //   <div className="container">
-    //     <div className="chatContainer">
-    //       <aside className="onlineListContainer">
-    //         <h2>Who's online PLaceHolder</h2>
-    //       </aside>
-    //       <section className="chatListContainer">
-    //         <MessageList 
-    //           messages={this.state.messages}
-    //         />
-    //         <SendMessageForm onSubmit={this.sendMessage} />
-    //       </section>
-    //     </div>
-    //   </div>
-    // );
-    const styles = {
-      container: {
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-      },
-      chatContainer: {
-        display: 'flex',
-        flex: 1,
-      },
-      whosOnlineListContainer: {
-        width: '15%',
-        padding: 20,
-        backgroundColor: '#2c303b',
-        color: 'white',
-        overflowY: 'scroll'
-      },
-      chatListContainer: {
-        padding: 20,
-        width: '85%',
-        display: 'flex',
-        flexDirection: 'column',
-      },
-    }
-
     return (
-      <div style={styles.container}>
-        <div style={styles.chatContainer}>
-          <aside style={styles.whosOnlineListContainer}>
+      <div className="container">
+        <div className="chatContainer">
+          <aside className="onlineListContainer">
             <WhosOnlineList 
               currentUser={this.state.currentUser}
               users={this.state.currentRoom.users}
             />
           </aside>
-          <section style={styles.chatListContainer}>
+          <section className="chatListContainer">
             <MessageList
               messages={this.state.messages}
-              style={styles.chatList}
             />
             <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
             <SendMessageForm
