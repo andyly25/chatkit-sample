@@ -38,6 +38,12 @@ class ChatScreen extends Component {
     })
   }
 
+  // add scroll to bottom of chatmessage later
+  // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
+  scrollToBottom() {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
   componentDidMount () {
     // note to self, to store instance locator and key in safe spot
     // also a config file for url
