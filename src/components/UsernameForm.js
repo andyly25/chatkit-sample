@@ -1,6 +1,9 @@
 // to collect the user's name
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { usernameOnSubmit, usernameOnChange } from '../actions/UsernameForm';
 
 class UsernameForm extends Component {
   constructor(props) {
@@ -8,29 +11,38 @@ class UsernameForm extends Component {
     this.state = {
       username: '',
     }
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.usernameOnSubmit = this.usernameOnSubmit.bind(this);
+    this.usernameOnChange = this.usernameOnChange.bind(this);
   }
 
-  onSubmit(e) {
+  usernameOnSubmit(e) {
     e.preventDefault();
     this.props.onSubmit(this.state.username);
   }
 
-  onChange(e) {
+  usernameOnChange(e) {
     this.setState({ username: e.target.value });
   }
+
+  // usernameOnSubmit(e) {
+  //   this.props.dispatch(usernameOnSubmit(e));
+  // }
+
+  // usernameOnChange(e) {
+  //   this.props.dispatch(usernameOnChange(e));
+  // }
+
 
   render() {
     return (
       <div>
         <div>
           <h2>What is your username?</h2>
-          <form onSubmit={this.onSubmit}> 
+          <form onSubmit={this.usernameOnSubmit}> 
             <input
               type="text"
               placeholder="full name"
-              onChange={this.onChange}
+              onChange={this.usernameOnChange}
             />
             <input type="submit"/>
           </form>
@@ -41,3 +53,4 @@ class UsernameForm extends Component {
 }
 
 export default UsernameForm;
+// export default connect()(UsernameForm);

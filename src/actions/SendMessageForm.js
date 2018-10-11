@@ -5,7 +5,7 @@ export const onSubmit = (event) => ({
 })
 
 export const ON_CHANGE = 'ON_CHANGE';
-export const onSubmit = (event) => ({
+export const onChange = (event) => ({
   type: ON_CHANGE,
   event
 })

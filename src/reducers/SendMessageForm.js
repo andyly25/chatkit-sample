@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
     // this.setState({ text: '' });
     action.e.preventDefault();
     props.onSubmit(this.state.text);
-    this.setState({ text: '' });
+    // this.setState({ text: '' });
     Object.assign({}, state, { text: ''})
   }
 

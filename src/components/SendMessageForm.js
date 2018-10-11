@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+// import { onSubmit, onChange } from '../actions/SendMessageForm';
 
 import './SendMessageForm.css'
 
@@ -25,6 +28,14 @@ class SendMessageForm extends Component {
     }
   }
 
+  // onSubmit(e) {
+  //   this.props.dispatch(onSubmit(e));
+  // }
+
+  // onChange(e) {
+  //   this.props.dispatch(onChange(e));
+  // }
+
   render() {
     return (
       <div className="sendmessage-container">
@@ -44,4 +55,9 @@ class SendMessageForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  text: state.text
+});
+
 export default SendMessageForm;
+// export default connect(mapStateToProps)(SendMessageForm);
