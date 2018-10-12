@@ -1,17 +1,19 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 
 // import reducers
+import appReducer from './reducers/App';
 import chatReducer from './reducers/ChatScreen';
 import sendMessageReducer from './reducers/SendMessageForm';
 import usernameReducer from './reducers/UsernameForm';
 
 const store = createStore(
   combineReducers({
+    app: appReducer,
     chatScreen: chatReducer,
     sendMessageForm: sendMessageReducer,
     usernameForm: usernameReducer
   }),
-  applyMiddleware(thunk)
+  // applyMiddleware(thunk)
 );
 
 // export default createStore(reducer);

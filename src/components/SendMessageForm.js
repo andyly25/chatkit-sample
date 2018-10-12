@@ -1,40 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import { onSubmit, onChange } from '../actions/SendMessageForm';
+import { onSubmit, onChange } from '../actions/SendMessageForm';
 
 import './SendMessageForm.css'
 
 class SendMessageForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: ''
-    }
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-    this.props.onSubmit(this.state.text);
-    this.setState({ text: '' });
-  }
-
-  onChange(e) {
-    this.setState({ text: e.target.value });
-    if (this.props.onChange) {
-      this.props.onChange();
-    }
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     text: ''
+  //   }
+  //   this.onSubmit = this.onSubmit.bind(this);
+  //   this.onChange = this.onChange.bind(this);
+  // }
 
   // onSubmit(e) {
-  //   this.props.dispatch(onSubmit(e));
+  //   e.preventDefault();
+  //   this.props.onSubmit(this.state.text);
+  //   this.setState({ text: '' });
   // }
 
   // onChange(e) {
-  //   this.props.dispatch(onChange(e));
+  //   this.setState({ text: e.target.value });
+  //   if (this.props.onChange) {
+  //     this.props.onChange();
+  //   }
   // }
+
+  onSubmit(e) {
+    this.props.dispatch(onSubmit(e));
+  }
+
+  onChange(e) {
+    this.props.dispatch(onChange(e));
+  }
 
   render() {
     return (
@@ -46,7 +46,7 @@ class SendMessageForm extends Component {
               className="sendmessage-input"
               placeholder="Type message here then hit Enter"
               onChange={this.onChange}
-              value={this.state.text}
+              value={this.props.text}
             />
           </form>
         </div>
@@ -59,5 +59,5 @@ const mapStateToProps = state => ({
   text: state.text
 });
 
-export default SendMessageForm;
-// export default connect(mapStateToProps)(SendMessageForm);
+// export default SendMessageForm;
+export default connect(mapStateToProps)(SendMessageForm);

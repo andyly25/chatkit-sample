@@ -6,31 +6,31 @@ import { connect } from 'react-redux';
 import { usernameOnSubmit, usernameOnChange } from '../actions/UsernameForm';
 
 class UsernameForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-    }
-    this.usernameOnSubmit = this.usernameOnSubmit.bind(this);
-    this.usernameOnChange = this.usernameOnChange.bind(this);
-  }
-
-  usernameOnSubmit(e) {
-    e.preventDefault();
-    this.props.onSubmit(this.state.username);
-  }
-
-  usernameOnChange(e) {
-    this.setState({ username: e.target.value });
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     username: '',
+  //   }
+  //   this.usernameOnSubmit = this.usernameOnSubmit.bind(this);
+  //   this.usernameOnChange = this.usernameOnChange.bind(this);
+  // }
 
   // usernameOnSubmit(e) {
-  //   this.props.dispatch(usernameOnSubmit(e));
+  //   e.preventDefault();
+  //   this.props.onSubmit(this.state.username);
   // }
 
   // usernameOnChange(e) {
-  //   this.props.dispatch(usernameOnChange(e));
+  //   this.setState({ username: e.target.value });
   // }
+
+  usernameOnSubmit(e) {
+    this.props.dispatch(usernameOnSubmit(e));
+  }
+
+  usernameOnChange(e) {
+    this.props.dispatch(usernameOnChange(e));
+  }
 
 
   render() {
@@ -52,5 +52,5 @@ class UsernameForm extends Component {
   }
 }
 
-export default UsernameForm;
-// export default connect()(UsernameForm);
+// export default UsernameForm;
+export default connect()(UsernameForm);

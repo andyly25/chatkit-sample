@@ -12,8 +12,8 @@ export default (state = initialState, action) => {
     // e.preventDefault();
     // this.props.onSubmit(this.state.text);
     // this.setState({ text: '' });
-    action.e.preventDefault();
-    props.onSubmit(this.state.text);
+    action.event.preventDefault();
+    action.onSubmit(state.text);
     // this.setState({ text: '' });
     Object.assign({}, state, { text: ''})
   }
@@ -23,9 +23,9 @@ export default (state = initialState, action) => {
     // if (this.props.onChange) {
     //   this.props.onChange();
     // }
-    object.assign({}, state, { text: e.target.value });
-    if (props.onChange) {
-      props.onChange();
+    Object.assign({}, state, { text: action.event.target.value });
+    if (action.onChange) {
+      action.onChange();
     }
   }
 }

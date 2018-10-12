@@ -8,16 +8,17 @@ const initialState = {
   username: ''
 }
 
+console.log("UN reducer", USERNAME_ON_SUBMIT);
 export default (state = initialState, action) => {
-  if (action.type === ON_SUBMIT) {
+  if (action.type === USERNAME_ON_SUBMIT) {
     // e.preventDefault();
     // this.props.onSubmit(this.state.username);
-    action.e.preventDefault();
-    this.props.onSubmit(state.username);
+    action.event.preventDefault();
+    action.onSubmit(state.username);
   }
 
-  if (action.type === ON_CHANGE) {
+  if (action.type === USERNAME_ON_CHANGE) {
     // this.setState({ username: e.target.value });
-    object.assign({}, state, { username: action.e.target.value });
+    Object.assign({}, state, { username: action.event.target.value });
   }
 }
