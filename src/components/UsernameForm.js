@@ -24,25 +24,31 @@ class UsernameForm extends Component {
   //   this.setState({ username: e.target.value });
   // }
 
+
+  //asynchronous action 
+  //dispatch action, and then make ajax post call to server if correct
+  //async of redux section
   usernameOnSubmit(e) {
+    console.log('event', e);
     this.props.dispatch(usernameOnSubmit(e));
   }
 
   usernameOnChange(e) {
-    this.props.dispatch(usernameOnChange(e));
+    this.props.dispatch(usernameOnChange(e.currentTarget.value));
   }
 
 
   render() {
+    console.log('username', this.props)
     return (
       <div>
         <div>
           <h2>What is your username?</h2>
-          <form onSubmit={this.usernameOnSubmit}> 
+          <form onSubmit={(e) => this.usernameOnSubmit(e)}> 
             <input
               type="text"
               placeholder="full name"
-              onChange={this.usernameOnChange}
+              onChange={(e) => this.usernameOnChange(e)}
             />
             <input type="submit"/>
           </form>

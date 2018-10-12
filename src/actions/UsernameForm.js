@@ -5,7 +5,7 @@ export const usernameOnSubmit = (event) => ({
 })
 
 export const USERNAME_ON_CHANGE = 'USERNAME_ON_CHANGE';
-export const usernameOnChange = (event) => ({
+export const usernameOnChange = (inputvalue) => ({
   type: USERNAME_ON_CHANGE,
-  event
+  inputvalue
 })

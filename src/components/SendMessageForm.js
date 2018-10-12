@@ -74,4 +74,4 @@ const mapStateToProps = state => ({
 // })
 
 // export default SendMessageForm;
-export default connect(SendMessageForm);
+export default connect(mapStateToProps)(SendMessageForm);

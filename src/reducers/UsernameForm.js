@@ -8,7 +8,6 @@ const initialState = {
   username: ''
 }
 
-console.log("UN reducer", USERNAME_ON_SUBMIT);
 export default (state = initialState, action) => {
   console.log("UN reducer action", action);
   if (action.type === USERNAME_ON_SUBMIT) {
@@ -20,6 +19,7 @@ export default (state = initialState, action) => {
 
   if (action.type === USERNAME_ON_CHANGE) {
     // this.setState({ username: e.target.value });
-    Object.assign({}, state, { username: action.event.target.value });
+    Object.assign({}, state, { username: action.inputvalue });
   }
+  return state;
 }

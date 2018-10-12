@@ -8,7 +8,6 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  console.log('SMF action', action);
   if (action.type === ON_SUBMIT) {
     // e.preventDefault();
     // this.props.onSubmit(this.state.text);
@@ -28,4 +27,5 @@ export default (state = initialState, action) => {
       action.onChange();
     }
   }
+  return state;
 }
