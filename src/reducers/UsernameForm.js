@@ -10,6 +10,7 @@ const initialState = {
 
 console.log("UN reducer", USERNAME_ON_SUBMIT);
 export default (state = initialState, action) => {
+  console.log("UN reducer action", action);
   if (action.type === USERNAME_ON_SUBMIT) {
     // e.preventDefault();
     // this.props.onSubmit(this.state.username);

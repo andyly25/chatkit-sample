@@ -59,5 +59,19 @@ const mapStateToProps = state => ({
   text: state.text
 });
 
+// const mapDispatchToProps = dispatch => ({
+//   onSubmit: e => {
+//     e.preventDefault();
+//     this.props.onSubmit(this.state.text);
+//     this.setState({ text: '' });
+//   },
+//   onChange: e => {
+//     this.setState({ text: e.target.value });
+//     if (this.props.onChange) {
+//       this.props.onChange();
+//     }
+//   }
+// })
+
 // export default SendMessageForm;
-export default connect(mapStateToProps)(SendMessageForm);
+export default connect(SendMessageForm);

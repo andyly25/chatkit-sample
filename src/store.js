@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
 
 // import reducers
 import appReducer from './reducers/App';
@@ -13,7 +14,7 @@ const store = createStore(
     sendMessageForm: sendMessageReducer,
     usernameForm: usernameReducer
   }),
-  // applyMiddleware(thunk)
+  applyMiddleware(thunk)
 );
 
 // export default createStore(reducer);
