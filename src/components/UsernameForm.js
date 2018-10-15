@@ -29,11 +29,16 @@ class UsernameForm extends Component {
   //dispatch action, and then make ajax post call to server if correct
   //async of redux section
   usernameOnSubmit(e) {
-    console.log('event', e);
+    e.preventDefault();
+    console.log('PROPPSS', this.props);
+    console.log('STATEE', this.state);
     this.props.dispatch(usernameOnSubmit(e));
+    console.log('SOME USERNAME', this.props);
+    this.props.onSubmit(this.props.username);
   }
 
   usernameOnChange(e) {
+    console.log('curr target', e.currentTarget.value);
     this.props.dispatch(usernameOnChange(e.currentTarget.value));
   }
 
@@ -58,5 +63,9 @@ class UsernameForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  username: state.username
+});
+
 // export default UsernameForm;
-export default connect()(UsernameForm);
+export default connect(mapStateToProps)(UsernameForm);

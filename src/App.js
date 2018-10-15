@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.currentScreen);
+    console.log('curr screen', this.props.currentScreen);
     // we conditionally render screen based on this.state.currentScreen
     // if (this.state.currentScreen === 'currUsernameScreen') {
     if (this.props.currentScreen === 'currUsernameScreen') {
@@ -55,8 +55,12 @@ class App extends Component {
       // return <ChatScreen currentUsername={this.state.currentUsername} />
       return <ChatScreen currentUsername={this.props.currentUsername} />
     }
-    return <UsernameForm onSubmit={this.onUsernameSubmitted} />;
+    // return <UsernameForm onSubmit={this.onUsernameSubmitted} />;
   }
+}
+
+App.defaultProps = {
+  currentScreen: 'currUsernameScreen'
 }
 
 const mapStateToProps = state => ({

@@ -4,7 +4,7 @@ import {
 
 const initialState = {
   currentUsername: '',
-  currentScreen: 'currUsernameScreen'
+  currentScreen: ''
 };
 
 export default function reducer(state = initialState, action) {
@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ action })
+      body: JSON.stringify({ username: action.username })
     })
       .then(response => {
         this.setState({

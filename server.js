@@ -34,11 +34,27 @@ app.post('/users', (req, res) => {
     });
 });
 
+// creating a room route
+app.post('/createRoom', (req, res) => {
+  const { username } = req.body
+  chatkit.createRoom({
+    creatorId: username,
+    name: 'some room'
+  })
+  .then(() => {
+    console.log('Chat room created');
+  }).catch((err) => {
+    console.log(err);
+  });
+});
+
+// authenticating a user
 app.post('/authenticate', (req, res) => {
   const authData = chatkit.authenticate({ userId: req.query.user_id });
   res.status(authData.status).send(authData.body);
 });
 
+// host server on 3001
 const PORT = 3001
 app.listen(PORT, err => {
   if (err) {
