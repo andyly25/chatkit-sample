@@ -3,53 +3,53 @@
 import React, { Component } from 'react';
 // import chatkit
 import Chatkit from '@pusher/chatkit';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
 import TypingIndicator from './TypingIndicator';
 import WhosOnlineList from './WhosOnlineList'
 
-import {sendTypingEvent, sendMessage} from '../actions/ChatScreen'
+// import {sendTypingEvent, sendMessage} from '../actions/ChatScreen'
 
 // import css
 import './ChatScreen.css'
 
 class ChatScreen extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state={
-  //     currentUser: {},
-  //     currentRoom: {},
-  //     messages: [],
-  //     usersWhoAreTyping: []
-  //   }
-  //   this.sendMessage = this.sendMessage.bind(this);
-  //   this.sendTypingEvent = this.sendTypingEvent.bind(this);
-  // }
-
-  sendTypingEvent() {
-    this.props.dispatch(sendTypingEvent());
-  }
-
-  sendMessage(text) {
-    this.props.dispatch(sendMessage(text));
+  constructor(props) {
+    super(props);
+    this.state={
+      currentUser: {},
+      currentRoom: {},
+      messages: [],
+      usersWhoAreTyping: []
+    }
+    // this.sendMessage = this.sendMessage.bind(this);
+    // this.sendTypingEvent = this.sendTypingEvent.bind(this);
   }
 
   // sendTypingEvent() {
-  //   this.state.currentUser
-  //     .isTypingIn({ roomId: this.state.currentRoom.id })
-  //     .catch(error => console.error('error', error));
-  //   console.log('Someone is typing');
+  //   this.props.dispatch(sendTypingEvent());
   // }
 
-  // // when SendMessage form is submitted, we call this
   // sendMessage(text) {
-  //   this.state.currentUser.sendMessage({
-  //     text,
-  //     roomId: this.state.currentRoom.id
-  //   })
+  //   this.props.dispatch(sendMessage(text));
   // }
+
+  sendTypingEvent() {
+    this.state.currentUser
+      .isTypingIn({ roomId: this.state.currentRoom.id })
+      .catch(error => console.error('error', error));
+    console.log('Someone is typing');
+  }
+
+  // when SendMessage form is submitted, we call this
+  sendMessage(text) {
+    this.state.currentUser.sendMessage({
+      text,
+      roomId: this.state.currentRoom.id
+    })
+  }
 
   // // add scroll to bottom of chatmessage later
   // // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
@@ -94,19 +94,19 @@ class ChatScreen extends Component {
             onNewMessage: message => {
               console.log(`${message} sent`);
               this.setState({
-                messages: [...this.props.messages, message],
+                messages: [...this.state.messages, message],
               })
             },
             onUserStartedTyping: user => {
               console.log(`User ${user.name} started typing`);
               this.setState({
-                usersWhoAreTyping: [...this.props.usersWhoAreTyping, user.name],
+                usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name],
               })
             },
             onUserStoppedTyping: user => {
               console.log(`User ${user.name} stopped typing`);
               this.setState({
-                usersWhoAreTyping: this.props.usersWhoAreTyping.filter(
+                usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
                   username => username !== user.name
                 ),
               })
@@ -129,18 +129,18 @@ class ChatScreen extends Component {
         <div className="chatContainer">
           <aside className="onlineListContainer">
             <WhosOnlineList 
-              currentUser={this.props.currentUser}
-              users={this.props.currentRoom.users}
+              currentUser={this.state.currentUser}
+              users={this.state.currentRoom.users}
             />
           </aside>
           <section className="chatListContainer">
             <MessageList
-              messages={this.props.messages}
+              messages={this.state.messages}
             />
-            <TypingIndicator usersWhoAreTyping={this.props.usersWhoAreTyping} />
+            <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
             <SendMessageForm
-              onSubmit={this.sendMessage}
-              onChange={this.sendTypingEvent}
+              onSubmit={this.sendMessage.bind(this)}
+              onChange={this.sendTypingEvent.bind(this)}
             />
           </section>
         </div>
@@ -149,14 +149,15 @@ class ChatScreen extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  messages: state.messages,
-  usersWhoAreTyping: state.usersWhoAreTyping,
-  currentUser: state.currentUser,
-  currentRoom: state.currentRoom
-});
+// const mapStateToProps = state => ({
+//   messages: state.messages,
+//   usersWhoAreTyping: state.usersWhoAreTyping,
+//   currentUser: state.currentUser,
+//   currentRoom: state.currentRoom
+// });
 
-export default connect(mapStateToProps)(ChatScreen);
+// export default connect(mapStateToProps)(ChatScreen);
+export default ChatScreen;
 
 //     // once initialized, call connect which happens async and a Promise returned
 //     // get a current user obj that represents current connected user
