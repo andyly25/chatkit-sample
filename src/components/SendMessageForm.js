@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-
-// import { onSubmit, onChange } from '../actions/SendMessageForm';
 
 import './SendMessageForm.css'
 
@@ -11,8 +8,6 @@ class SendMessageForm extends Component {
     this.state = {
       text: ''
     }
-    // this.onSubmit = this.onSubmit.bind(this);
-    // this.onChange = this.onChange.bind(this);
   }
 
   onSubmit(e) {
@@ -27,14 +22,6 @@ class SendMessageForm extends Component {
       this.props.onChange();
     }
   }
-
-  // onSubmit(e) {
-  //   this.props.dispatch(onSubmit(e));
-  // }
-
-  // onChange(e) {
-  //   this.props.dispatch(onChange(e));
-  // }
 
   render() {
     return (
@@ -55,23 +42,4 @@ class SendMessageForm extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   text: state.text
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   onSubmit: e => {
-//     e.preventDefault();
-//     this.props.onSubmit(this.state.text);
-//     this.setState({ text: '' });
-//   },
-//   onChange: e => {
-//     this.setState({ text: e.target.value });
-//     if (this.props.onChange) {
-//       this.props.onChange();
-//     }
-//   }
-// })
-
 export default SendMessageForm;
-// export default connect(mapStateToProps)(SendMessageForm);

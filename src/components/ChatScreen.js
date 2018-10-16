@@ -3,14 +3,11 @@
 import React, { Component } from 'react';
 // import chatkit
 import Chatkit from '@pusher/chatkit';
-// import { connect } from 'react-redux';
 
 import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
 import TypingIndicator from './TypingIndicator';
 import WhosOnlineList from './WhosOnlineList'
-
-// import {sendTypingEvent, sendMessage} from '../actions/ChatScreen'
 
 // import css
 import './ChatScreen.css'
@@ -24,17 +21,7 @@ class ChatScreen extends Component {
       messages: [],
       usersWhoAreTyping: []
     }
-    // this.sendMessage = this.sendMessage.bind(this);
-    // this.sendTypingEvent = this.sendTypingEvent.bind(this);
   }
-
-  // sendTypingEvent() {
-  //   this.props.dispatch(sendTypingEvent());
-  // }
-
-  // sendMessage(text) {
-  //   this.props.dispatch(sendMessage(text));
-  // }
 
   sendTypingEvent() {
     this.state.currentUser
@@ -69,6 +56,7 @@ class ChatScreen extends Component {
       tokenProvider: new Chatkit.TokenProvider({
         url: 'http://localhost:3001/authenticate'
       }),
+      // leaving this here to debug chatkit in case errors
       // logger: {
       //   verbose: console.log,
       //   debug: console.log,
@@ -149,86 +137,4 @@ class ChatScreen extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   messages: state.messages,
-//   usersWhoAreTyping: state.usersWhoAreTyping,
-//   currentUser: state.currentUser,
-//   currentRoom: state.currentRoom
-// });
-
-// export default connect(mapStateToProps)(ChatScreen);
 export default ChatScreen;
-
-//     // once initialized, call connect which happens async and a Promise returned
-//     // get a current user obj that represents current connected user
-//     chatManager
-//       .connect()
-//       .then(currentUser => {
-//         this.setState({ currentUser });
-//         // call subscribeToRoom on curr user, takes event handler onNewMessage
-//         // called in real tiem each time new message arrives
-//         // call forceUpdate which tells React to evaluate currentRoom.users and update the UI
-//         return currentUser.subscribeToRoom({
-//           roomId: 18192681,
-//           messageLimit: 100,
-//           hooks: {
-//             onNewMessage: message => {
-//               console.log(`${message} sent`);
-//               this.setState({
-//                 messages: [...this.state.messages, message],
-//               })
-//             },
-//             onUserStartedTyping: user => {
-//               console.log(`User ${user.name} started typing`);
-//               this.setState({
-//                 usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name],
-//               })
-//             },
-//             onUserStoppedTyping: user => {
-//               console.log(`User ${user.name} stopped typing`);
-//               this.setState({
-//                 usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
-//                   username => username !== user.name
-//                 ),
-//               })
-//             },
-//             onUserCameOnline: () => this.forceUpdate(),
-//             onUserWentOffline: () => this.forceUpdate(),
-//             onUserJoined: () => this.forceUpdate()
-//           }
-//         })
-//       })
-//       .then(currentRoom => {
-//         this.setState({ currentRoom })
-//       })
-//       .catch(error => console.error('error', error));
-//   }
-
-//   render() {
-//     return (
-//       <div className="container">
-//         <div className="chatContainer">
-//           <aside className="onlineListContainer">
-//             <WhosOnlineList 
-//               currentUser={this.state.currentUser}
-//               users={this.state.currentRoom.users}
-//             />
-//           </aside>
-//           <section className="chatListContainer">
-//             <MessageList
-//               messages={this.state.messages}
-//             />
-//             <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
-//             <SendMessageForm
-//               onSubmit={this.sendMessage}
-//               onChange={this.sendTypingEvent}
-//             />
-//           </section>
-//         </div>
-//       </div>
-//     )
-
-//   }
-// }
-
-// export default ChatScreen;

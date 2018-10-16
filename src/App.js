@@ -6,8 +6,6 @@ import UsernameForm from './components/UsernameForm';
 // import ChatScreen
 import ChatScreen from './components/ChatScreen';
 
-// import { onUsernameSubmitted } from './actions/App';
-
 class App extends Component {
   constructor() {
     super();
@@ -47,28 +45,19 @@ class App extends Component {
   }
 
   render() {
-    // console.log('curr screen', this.props.currentScreen);
     // we conditionally render screen based on this.state.currentScreen
     if (this.state.currentScreen === '') {
-    // if (this.props.currentScreen === 'currUsernameScreen') {
 
       // render UsernameForm and hook up onUsernameSubmitted event handler
       // When this is called, we send POST request to /users route defined
       return <UsernameForm onSubmit={this.onUsernameSubmitted.bind(this)} />
     }
     if (this.state.currentScreen === 'ChatScreen') {
-    // if (this.props.currentScreen === 'ChatScreen') {
 
       return <ChatScreen currentUsername={this.state.currentUsername} />
-      // return <ChatScreen currentUsername={this.props.currentUsername} />
     }
-    // return <UsernameForm onSubmit={this.onUsernameSubmitted} />;
   }
 }
-
-// App.defaultProps = {
-//   currentScreen: 'currUsernameScreen'
-// }
 
 const mapStateToProps = state => ({
   currentUsername: state.currentUsername,
